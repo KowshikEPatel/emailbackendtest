@@ -17,7 +17,7 @@ app.use(express.json())
 app.get('/',(req,response)=>{
     
     
-    async function sendMail(){
+    async function sendMail(toemail){
         try {
             const accessToken = await oAuthClient.getAccessToken()
     
@@ -35,10 +35,10 @@ app.get('/',(req,response)=>{
             })
             const mailOptions = {
                 from:'<kowshikerappajipatel@gmail.com>',
-                to:'kowshiksepatel@gmail.com',
+                to:toemail,
                 subject:'Hello from gmail using API',
                 text:'Hello from gmail using API',
-                html:'<h1>Hello from gmail using API</h1>'
+                html:'<h1>Hello from gmail using API. So we are good to go</h1>'
     
             }
     
@@ -51,7 +51,7 @@ app.get('/',(req,response)=>{
         }
     }
 
-    sendMail()
+    sendMail('kowshiksepatel@gmail.com')
     .then(res =>{
         console.log('Email sent....',res)
         response.status(200).json({res})
